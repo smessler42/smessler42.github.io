@@ -14,3 +14,10 @@ if (tables % spotters !== 0){
 }
 document.getElementById('result').innerHTML = result;
 }
+
+InputDeviceInfo.addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        document.getElementById("submitbtn").click();
+}
+});
