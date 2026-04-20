@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My First Webpage</title>
+        <meta charset="UTF-8">
+        <meta name="description" content="This is my first website. It includes lots of information about my life.">
+        <link rel="icon" type="image/x-icon" href="images/handsock.jpg">
+
+        <style>
+
+
+            body {
+                border:gray hidden 4px;
+                margin:0;
+            }
+
+            header {
+                z-index: 10000;
+                position: sticky;
+                padding: 0;
+                top: 0px;
+                width: 100%
+            }
+            .navbar ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                border: 1px solid #e7e7e7;
+                background-color:#f3f3f3;
+            }
+            .navbar li {
+                float: left;
+                padding: 5px;
+            }
+
+            #navlogo {
+                margin-top: 5px;
+                display: block;
+                color:#666;
+                text-align: center;
+                text-decoration: none;
+            }
+
+            #navbutton {
+                display: block;
+                color: #666;
+                text-align: center;
+                padding: 28px 28px;
+                text-decoration: none;
+                border: 1px hidden red;
+                border-radius: 2px;
+            }
+
+            .navbar li #navbutton.active {
+                color: white;
+            }
+
+            
+            .title {
+                margin: 8%;
+
+            }
+
+            .story{
+                margin: 8%;
+                border-color: black;
+            }
+
+            
+
+            
+
+
+            
+        </style>
+    </head>
+    <body>
+        <div class="container">
+
+
+            <header>
+            <div class="navbar" id="navbar">
+                <ul>
+                    <li style="float: left;">
+                        <a href="art.html" id="navlogo">
+                            <strong id="navbutton">Shayna Messler's Artistic Endeavors</strong>
+                        </a>
+                    </li>
+                    <li style="float: right;">
+                        <a href="projects.html" id="navbutton">
+                            <strong>PROJECTS</strong>
+                        </a>
+                    </li>
+                    <li style="float: right;">
+                        <a href="art.html" id="navbutton">
+                            <strong>ART</strong>
+                        </a>
+                    </li>
+                    <li style="float: right;">
+                        <a href="files/Shayna_Messler_latexpower.pdf" target="_blank" rel="noopener noreferrer" id="navbutton">
+                            <strong>RESUME</strong>
+                        </a>
+                    </li>
+                    <li style="float: right;">
+                        <a href="animate.html" id="navbutton">
+                            <strong>HOME</strong>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+            
+            <main>
+               
+
+            <div class="title">
+            Cheat, by Shayna Messler
+            </div>
+
+            </br>
+            <div class="story">
+            She came every night. Her faucet shinier, her bowl cleaner. She was everything I could never become. I zip my bag; there wasn't much here. I lay back, letting the waves of time take me back to where all porcelain is from. He said he loved me, but he let that sink in.
+            </div>
+          
+            <details class="title">
+                <summary>Click here to expand more information</summary>
+                <p>This was my submission to the Feburary 2026, 53 word story competition hosted by press53.com, inspired by the theme, <b>sink</b>.</p>
+            </details>
+                
+            </main>
+            
+
+        </div>
+    </body>
+</html>

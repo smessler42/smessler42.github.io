@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My First Webpage</title>
+        <meta charset="UTF-8">
+        <meta name="description" content="This is my first website. It includes lots of information about my life.">
+        <link rel="icon" type="image/x-icon" href="images/handsock.jpg">
+
+        <style>
+
+
+            body {
+                border:gray hidden 4px;
+                margin:0;
+            }
+
+            header {
+                z-index: 10000;
+                position: sticky;
+                padding: 0;
+                top: 0px;
+                width: 100%
+            }
+            .navbar ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                border: 1px solid #e7e7e7;
+                background-color:#f3f3f3;
+            }
+            .navbar li {
+                float: left;
+                padding: 5px;
+            }
+
+            #navlogo {
+                margin-top: 5px;
+                display: block;
+                color:#666;
+                text-align: center;
+                text-decoration: none;
+            }
+
+            #navbutton {
+                display: block;
+                color: #666;
+                text-align: center;
+                padding: 28px 28px;
+                text-decoration: none;
+                border: 1px hidden red;
+                border-radius: 2px;
+            }
+
+            .navbar li #navbutton.active {
+                color: white;
+            }
+
+            
+            .title {
+                margin: 5%;
+                text-align: center;
+
+
+            }
+
+            .story{
+                margin: 10%;
+                border-color: black;
+            }
+
+            .details{
+                margin: 10%;
+                text-align: center;
+            }
+            .aboutsection {
+                border: black none 4px;
+                margin-top:50px;
+                margin-bottom:50px;
+                background-color: #546B41;
+                color:#FFF8EC;
+            }
+            .aboutsection .sectionimg{
+                margin: 50px 0 50px 0;
+            }
+            .howtosection .sectionimg{
+                margin: 50px 0 50px 0
+            }
+            .howtosection{
+                border: black none 4px;
+                margin-top:50px;
+                margin-bottom:50px;
+                
+            }
+            .sectiontext {
+                max-width: 500px;
+                text-align: left;
+                
+            }
+            .sectionheader {
+                text-align: left;
+            }
+
+            .sectionimg{
+                margin-top: 0px;
+                margin-right: 5%;
+                width:450px;
+                
+            }
+
+            #aboutButton {
+                background-color: transparent;
+                display: block;
+                padding: 20px 20px;
+                color:#FFF8EC;
+                text-decoration: none;
+                border: 2px solid #FFF8EC;
+                font-family: 'Noto Sans', sans-serif;
+                font-size:15px;
+                margin-left: 0; 
+                margin: 25px 0 25px 0; 
+                font-weight: bold;
+
+            }
+            #shopallbutton:hover {
+                cursor: pointer;
+                text-decoration: underline;
+            }
+            #aboutButton:hover{
+                background-color: #FFF8EC;
+                padding: 24px 24px;
+                color:#546B41;
+                transition: color 0.5s;
+                transition: padding 0.25s;
+                cursor: pointer;
+                content: " -> "
+            }
+            .sectionbox {
+                padding: 0px 10px 0px 10px;
+            }
+
+            button.callToActionButton {
+                background-color: transparent;
+                display: block;
+                padding: 20px 20px;
+                color:#546B41;
+                text-decoration: none;
+                border: 2px solid #546B41;
+                font-family: 'Noto Sans', sans-serif;
+                font-size:15px;
+                margin-left: 0; margin: 25px 0 25px 0; 
+                font-weight: bold;
+
+            }
+
+            button.callToActionButton:hover {
+                background-color: #214341;
+                padding: 24px 24px;
+                color:white;
+                transition: background-color 0.5s;
+                transition: color 0.5s;
+                transition: padding 0.25s;
+                
+                cursor: pointer;
+                content: " -> "
+
+            }
+
+            
+        </style>
+    </head>
+    <body>
+        <div class="container">
+
+
+            <header>
+            <div class="navbar" id="navbar">
+                <ul>
+                    <li style="float: left;">
+                        <a href="projects.html" id="navlogo">
+                            <strong id="navbutton">Shayna Messler's Technical Endeavors</strong>
+                        </a>
+                    </li>
+                    <li style="float: right;">
+                        <a href="projects.html" id="navbutton">
+                            <strong>PROJECTS</strong>
+                        </a>
+                    </li>
+                    <li style="float: right;">
+                        <a href="art.html" id="navbutton">
+                            <strong>ART</strong>
+                        </a>
+                    </li>
+                    <li style="float: right;">
+                        <a href="files/Shayna_Messler_latexpower.pdf" target="_blank" rel="noopener noreferrer" id="navbutton">
+                            <strong>RESUME</strong>
+                        </a>
+                    </li>
+                    <li style="float: right;">
+                        <a href="animate.html" id="navbutton">
+                            <strong>HOME</strong>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+            
+            <main>
+
+                <div class="title"><h1>K'Nex Coaster Project</h1></div>
+               
+
+            <div class="aboutsection">
+                <table cellspacing="0" style="margin-left: auto; margin-right:auto;">
+                    <tbody><tr>
+                        <td id="sectionimg" class="sectionbox"><img class="sectionimg" id="whoAreWeImg" src="images/knex1.jpg" style="border:black none 1px; "></td>
+                        <td class="sectionbox" id="card" style="text-align:center;">
+
+                            <h1 class="sectionheader">WHAT DO WE DO?</h1>
+                            <p class="sectiontext"> Our over-arching goal is to construct a model roller coaster out of K'Nex, that operates and works as a working roller coaster. 
+                                We are a multidisiplinary team of engineers and designers who have a love of roller coasters and theme parks. Our skills and experiences range from
+                                3D modeling and printing, embedded system design, signal processing, game design, controls, structures, and more, all of which we are able to apply to this project.
+                            </p>
+                        </td>
+                    </tr>
+                </tbody></table>
+            </div>
+
+            <div class="howtosection">
+            <table cellspacing="" style="margin-left: auto; margin-right:auto;">
+                <tbody><tr>
+                    
+                    <td class="sectionbox" id="card" style="text-align:center; padding-top: 10px; padding-bottom: 10px">
+                        <h1 class="sectionheader">FUTURE PLANS</h1>
+                        <p class="sectiontext">
+                            Implementing design and environment elements using 3D printing techniques.
+                        </br>
+                            Updating our station GUI and reconnecting power to new lift hills.
+                        </br>
+                            Optimizing 3D printed custom carts to connect and stay on theme.
+                        </br>
+
+                        </p>
+                    </td>
+                    <td id="sectionimg" class="sectionbox"><img src="images/knex2.jpg" class="sectionimg" id="tutorialsHomeImg" style="border:black none 1px;"></td>
+                    
+                </tr>
+            </tbody></table>
+        </div>
+
+        <div class="aboutsection">
+                <table cellspacing="0" style="margin-left: auto; margin-right:auto;">
+                    <tbody><tr>
+                        <td id="sectionimg" class="sectionbox"><img class="sectionimg" id="whoAreWeImg" src="images/knex3.jpg" style="border:black none 1px; "></td>
+                        <td class="sectionbox" id="card" style="text-align:center;">
+
+                            <h1 class="sectionheader">CURRENT & PAST PROJECTS</h1>
+                            <p class="sectiontext"> 
+                                <ul>
+                                    <li>Large Coaster</li>
+                                    <li>Moon Lander Coaster</li>
+                                    <li>Scorpion Recreation</li>
+                                </ul>
+                                
+                        </p>
+                        </td>
+                    </tr>
+                </tbody></table>
+            </div>
+                
+            </main>
+            
+
+        </div>
+    </body>
+</html>
