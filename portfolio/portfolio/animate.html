@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My First Webpage</title>
+        <meta charset="UTF-8">
+        <meta name="description" content="This is my first website. It includes lots of information about my life.">
+        <link rel="icon" type="image/x-icon" href="images/handsock.jpg">
+
+        <style>
+
+            .body {
+                background-color: gainsboro;
+            }
+            .container {
+                min-height: 50cm;
+                
+            }
+
+            .downarrow {
+                top: 90%;
+                position: fixed;
+                left: 50%;
+
+                animation: leave 1s linear infinite;
+                animation-iteration-count: 1;
+                animation-fill-mode: both;
+                animation-play-state: paused;
+                animation-delay: calc(var(--scroll) * -1s);
+            }
+            
+            @keyframes leave {
+                to{transform: translateY(-10000px)}
+            }
+
+            .pagelink1 {
+                top:80%;
+                position: fixed;
+                left: 50%;
+                margin-top: -50px;
+                margin-left: -50px;
+
+                animation: slideup 3s linear infinite;
+                animation-duration: 1s;
+                animation-iteration-count: 1;
+                animation-fill-mode: both;
+                animation-play-state: paused;
+                animation-delay: calc(var(--scroll) * -1s);
+
+                
+            }
+
+            .pagelink2 {
+                top: 60%;
+                position: fixed;
+                left: 50%;
+                margin-top: -50px;
+                margin-left: -50px;
+
+                animation: slideleft 3s linear infinite;
+                animation-duration: 1s;
+                animation-iteration-count: 1;
+                animation-fill-mode: both;
+                animation-play-state: paused;
+                animation-delay: calc(var(--scroll) * -1s);
+                
+            }
+
+            .pagelink3 {
+                top: 40%;
+                position: fixed;
+                left: 50%;
+                margin-top: -50px;
+                margin-left: -50px;
+
+                animation: slidedown 3s linear infinite;
+                animation-duration: 1s;
+                animation-iteration-count: 1;
+                animation-fill-mode: both;
+                animation-play-state: paused;
+                animation-delay: calc(var(--scroll) * -1s);
+                
+            }
+
+            .pagelink4 {
+                top: 20%;
+                position: fixed;
+                left: 50%;
+                margin-top: -50px;
+                margin-left: -50px;
+
+                animation: slideright 3s linear infinite;
+                animation-duration: 1s;
+                animation-iteration-count: 1;
+                animation-fill-mode: both;
+                animation-play-state: paused;
+                animation-delay: calc(var(--scroll) * -1s);
+                
+            }
+
+            .link {
+                text-align: center;
+                text-decoration: none;
+                color: black;
+
+            }
+
+            @keyframes rotate {
+            to {
+                transform: rotate(360deg);
+            }
+            }
+
+            @keyframes appear {
+                from{opacity: 0}
+                to{opacity: 1}
+            }
+
+            @keyframes slideleft {
+                from{transform: translateX(1000px)}
+            }
+
+            @keyframes slideup {
+                from{transform: translateY(1000px)}
+            }
+
+            @keyframes slidedown {
+                from{transform: translateY(-1000px)}
+            }
+
+            @keyframes slideright {
+                from{transform: translateX(-1000px)}
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            
+            <main>
+               
+
+            <script>
+            window.addEventListener('scroll', () => {
+                document.body.style.setProperty('--scroll', window.pageYOffset / (document.body.offsetHeight - window.innerHeight));
+            }, false);
+            </script>
+
+            <div class="downarrow">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7 13l5 5 5-5M12 18V6" />
+                </svg>
+            </div>
+
+
+            <div class="pagelink1">
+                <a href="contact.html" class="link">
+                <svg width="100" height="90" viewBox="0 0 24 24">
+                    <path d="M21,9H15V22H13V16H11V22H9V9H3V7H21M12,2A2,2 0 0,1 14,4A2,2 0 0,1 12,6C10.89,6 10,5.1 10,4C10,2.89 10.89,2 12,2Z" />
+                </svg>
+                
+                    <h3>Contact</h3>
+                </a>
+            </div>
+
+            <div class="pagelink2">
+                <a href="about.html" class="link">
+                <svg width="100" height="90" viewBox="0 0 24 24">
+                    <path d="M21,9H15V22H13V16H11V22H9V9H3V7H21M12,2A2,2 0 0,1 14,4A2,2 0 0,1 12,6C10.89,6 10,5.1 10,4C10,2.89 10.89,2 12,2Z" />
+                </svg>
+                
+                    <h3>About</h3>
+                </a>
+            </div>
+
+            <div class="pagelink3">
+                <a href="art.html" class="link">
+                <svg width="100" height="90" viewBox="0 0 24 24">
+                    <path d="M21,9H15V22H13V16H11V22H9V9H3V7H21M12,2A2,2 0 0,1 14,4A2,2 0 0,1 12,6C10.89,6 10,5.1 10,4C10,2.89 10.89,2 12,2Z" />
+                </svg>
+                
+                    <h3>Art</h3>
+                </a>
+            </div>
+
+            <div class="pagelink4">
+                <a href="projects.html" class="link">
+                <svg width="100" height="90" viewBox="0 0 24 24">
+                    <path d="M21,9H15V22H13V16H11V22H9V9H3V7H21M12,2A2,2 0 0,1 14,4A2,2 0 0,1 12,6C10.89,6 10,5.1 10,4C10,2.89 10.89,2 12,2Z" />
+                </svg>
+                
+                    <h3>Projects</h3>
+                </a>
+            </div>
+                
+                
+            </main>
+            
+
+        </div>
+    </body>
+</html>
