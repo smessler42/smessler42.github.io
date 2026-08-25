@@ -1,200 +1,394 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <title>My First Webpage</title>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="This is my first website. It includes lots of information about my life.">
         <link rel="icon" type="image/x-icon" href="images/handsock.jpg">
 
         <style>
 
-            .body {
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                border: gray hidden 4px;
+                margin: 0;
+                font-family: 'Noto Sans', sans-serif;
+                background-color: #546B41;
+            }
+
+            .container {
                 background-color: gainsboro;
             }
-            .container {
-                min-height: 50cm;
-                
+
+            /* ---------- Intro screen ---------- */
+
+            .intro {
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                background-color: #546B41;
+                color: #FFF8EC;
+                padding: 20px;
+                position: relative;
+                will-change: transform, opacity;
+            }
+
+            .intro h1 {
+                font-size: clamp(28px, 6vw, 48px);
+                margin-bottom: 10px;
+            }
+
+            .intro p {
+                font-size: clamp(14px, 2.5vw, 18px);
+                max-width: 500px;
+                opacity: 0.9;
             }
 
             .downarrow {
-                top: 90%;
-                position: fixed;
-                left: 50%;
-
-                animation: leave 1s linear infinite;
-                animation-iteration-count: 1;
-                animation-fill-mode: both;
-                animation-play-state: paused;
-                animation-delay: calc(var(--scroll) * -1s);
-            }
-            
-            @keyframes leave {
-                to{transform: translateY(-10000px)}
+                margin-top: 40px;
+                animation: bounce 1.6s ease-in-out infinite;
             }
 
-            .pagelink1 {
-                top:80%;
-                position: fixed;
-                left: 50%;
-                margin-top: -50px;
-                margin-left: -50px;
-
-                animation: slideup 3s linear infinite;
-                animation-duration: 1s;
-                animation-iteration-count: 1;
-                animation-fill-mode: both;
-                animation-play-state: paused;
-                animation-delay: calc(var(--scroll) * -1s);
-
-                
+            @keyframes bounce {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(14px); }
             }
 
-            .pagelink2 {
-                top: 60%;
-                position: fixed;
-                left: 50%;
-                margin-top: -50px;
-                margin-left: -50px;
+            /* ---------- Links screen ---------- */
 
-                animation: slideleft 3s linear infinite;
-                animation-duration: 1s;
-                animation-iteration-count: 1;
-                animation-fill-mode: both;
-                animation-play-state: paused;
-                animation-delay: calc(var(--scroll) * -1s);
-                
+            .linkscreen {
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: #FFF8EC;
+                padding: 40px 20px;
+                overflow: hidden; /* Prevents scrollbars when items/backgrounds are off-screen */
+                position: relative; /* Anchor for ambient background element */
             }
 
-            .pagelink3 {
-                top: 40%;
-                position: fixed;
-                left: 50%;
-                margin-top: -50px;
-                margin-left: -50px;
-
-                animation: slidedown 3s linear infinite;
-                animation-duration: 1s;
-                animation-iteration-count: 1;
-                animation-fill-mode: both;
-                animation-play-state: paused;
-                animation-delay: calc(var(--scroll) * -1s);
-                
+            /* Faint background icon element */
+            .bg-icon-watermark {
+                position: absolute;
+                width: 450px;
+                height: 450px;
+                color: #214341;
+                opacity: 0;
+                pointer-events: none; /* Mouse ignores it so hover links work seamlessly */
+                z-index: 1;
+                transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
             }
 
-            .pagelink4 {
-                top: 20%;
-                position: fixed;
+            /* Starting positions off-screen per direction */
+            .bg-icon-watermark[data-dir="up"] {
+                top: -50px;
                 left: 50%;
-                margin-top: -50px;
-                margin-left: -50px;
+                transform: translate(-50%, -100%);
+            }
+            .bg-icon-watermark[data-dir="down"] {
+                bottom: -50px;
+                left: 50%;
+                transform: translate(-50%, 100%);
+            }
+            .bg-icon-watermark[data-dir="left"] {
+                top: 50%;
+                left: -50px;
+                transform: translate(-100%, -50%);
+            }
+            .bg-icon-watermark[data-dir="right"] {
+                top: 50%;
+                right: -50px;
+                transform: translate(100%, -50%);
+            }
 
-                animation: slideright 3s linear infinite;
-                animation-duration: 1s;
-                animation-iteration-count: 1;
-                animation-fill-mode: both;
-                animation-play-state: paused;
-                animation-delay: calc(var(--scroll) * -1s);
-                
+            /* Active state when hovering a link */
+            .bg-icon-watermark.active {
+                opacity: 0.07; /* Faint appearance */
+            }
+
+            .bg-icon-watermark[data-dir="up"].active {
+                transform: translate(-50%, 0);
+            }
+            .bg-icon-watermark[data-dir="down"].active {
+                transform: translate(-50%, 0);
+            }
+            .bg-icon-watermark[data-dir="left"].active {
+                transform: translate(0, -50%);
+            }
+            .bg-icon-watermark[data-dir="right"].active {
+                transform: translate(0, -50%);
+            }
+
+            .linkgrid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 60px 80px;
+                max-width: 600px;
+                width: 100%;
+                position: relative;
+                z-index: 2; /* Sits above the background watermark */
+                will-change: transform, opacity;
+            }
+
+            @media (max-width: 600px) {
+                .linkgrid {
+                    grid-template-columns: 1fr;
+                    gap: 40px;
+                }
+                .bg-icon-watermark {
+                    width: 280px;
+                    height: 280px;
+                }
             }
 
             .link {
                 text-align: center;
                 text-decoration: none;
-                color: black;
-
+                color: #214341;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 14px;
+                will-change: transform, opacity;
             }
 
-            @keyframes rotate {
-            to {
-                transform: rotate(360deg);
-            }
-            }
-
-            @keyframes appear {
-                from{opacity: 0}
-                to{opacity: 1}
+            .link svg {
+                width: 64px;
+                height: 64px;
+                transition: transform 0.3s ease;
             }
 
-            @keyframes slideleft {
-                from{transform: translateX(1000px)}
+            .link h3 {
+                margin: 0;
+                font-size: 22px;
+                letter-spacing: 1px;
             }
 
-            @keyframes slideup {
-                from{transform: translateY(1000px)}
+            .link:hover {
+                color: #546B41;
             }
 
-            @keyframes slidedown {
-                from{transform: translateY(-1000px)}
+            .link:hover svg {
+                transform: scale(1.15);
             }
 
-            @keyframes slideright {
-                from{transform: translateX(-1000px)}
+            @media (prefers-reduced-motion: reduce) {
+                .link, .downarrow, .intro, .linkgrid, .bg-icon-watermark {
+                    animation: none !important;
+                    transition: none !important;
+                    opacity: 1 !important;
+                    transform: none !important;
+                }
             }
+
         </style>
     </head>
     <body>
         <div class="container">
-            
+
             <main>
-               
 
-            <script>
-            window.addEventListener('scroll', () => {
-                document.body.style.setProperty('--scroll', window.pageYOffset / (document.body.offsetHeight - window.innerHeight));
-            }, false);
-            </script>
+                <section class="intro" id="intro">
+                    <h1>Hi, I'm Shayna Messler</h1>
+                    <p>Welcome to my portfolio. Scroll down to explore my work, art, and how to get in touch.</p>
+                    <div class="downarrow" aria-hidden="true">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M7 13l5 5 5-5M12 18V6" />
+                        </svg>
+                    </div>
+                </section>
 
-            <div class="downarrow">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M7 13l5 5 5-5M12 18V6" />
-                </svg>
-            </div>
+                <section class="linkscreen" id="linkscreen">
+                    
+                    <!-- Faint background watermark icon container -->
+                    <div id="bgWatermark" class="bg-icon-watermark" aria-hidden="true"></div>
 
+                    <div class="linkgrid" id="linkgrid">
 
-            <div class="pagelink1">
-                <a href="contact.html" class="link">
-                <svg width="100" height="90" viewBox="0 0 24 24">
-                    <path d="M21,9H15V22H13V16H11V22H9V9H3V7H21M12,2A2,2 0 0,1 14,4A2,2 0 0,1 12,6C10.89,6 10,5.1 10,4C10,2.89 10.89,2 12,2Z" />
-                </svg>
-                
-                    <h3>Contact</h3>
-                </a>
-            </div>
+                        <a href="about.html" class="link" data-dir="up">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 12c2.7 0 8 1.34 8 4v2H4v-2c0-2.66 5.3-4 8-4zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/>
+                            </svg>
+                            <h3>About</h3>
+                        </a>
 
-            <div class="pagelink2">
-                <a href="about.html" class="link">
-                <svg width="100" height="90" viewBox="0 0 24 24">
-                    <path d="M21,9H15V22H13V16H11V22H9V9H3V7H21M12,2A2,2 0 0,1 14,4A2,2 0 0,1 12,6C10.89,6 10,5.1 10,4C10,2.89 10.89,2 12,2Z" />
-                </svg>
-                
-                    <h3>About</h3>
-                </a>
-            </div>
+                        <a href="art.html" class="link" data-dir="left">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c1.1 0 2-.9 2-2 0-.51-.2-.98-.52-1.33-.31-.34-.5-.79-.5-1.28 0-1.1.9-2 2-2h2.36C20.66 15.39 22 13.36 22 11c0-4.97-4.48-9-10-9zm-5.5 9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm3-4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm3 4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+                            </svg>
+                            <h3>Art</h3>
+                        </a>
 
-            <div class="pagelink3">
-                <a href="art.html" class="link">
-                <svg width="100" height="90" viewBox="0 0 24 24">
-                    <path d="M21,9H15V22H13V16H11V22H9V9H3V7H21M12,2A2,2 0 0,1 14,4A2,2 0 0,1 12,6C10.89,6 10,5.1 10,4C10,2.89 10.89,2 12,2Z" />
-                </svg>
-                
-                    <h3>Art</h3>
-                </a>
-            </div>
+                        <a href="projects.html" class="link" data-dir="down">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M10 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-8l-2-2z"/>
+                            </svg>
+                            <h3>Projects</h3>
+                        </a>
 
-            <div class="pagelink4">
-                <a href="projects.html" class="link">
-                <svg width="100" height="90" viewBox="0 0 24 24">
-                    <path d="M21,9H15V22H13V16H11V22H9V9H3V7H21M12,2A2,2 0 0,1 14,4A2,2 0 0,1 12,6C10.89,6 10,5.1 10,4C10,2.89 10.89,2 12,2Z" />
-                </svg>
-                
-                    <h3>Projects</h3>
-                </a>
-            </div>
-                
-                
+                        <a href="contact.html" class="link" data-dir="right">
+                            <!-- Rotary Telephone Base + Open-Claw Lobster Handset -->
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <!-- Rotary Telephone Base -->
+                                <path d="M5.5 22h13a1.5 1.5 0 0 0 1.5-1.5V19.5H4v1A1.5 1.5 0 0 0 5.5 22z" />
+                                <path d="M6 19.5l1.6-4.2h8.8l1.6 4.2H6z" />
+                                
+                                <!-- Rotary Wheel with 10 Holes -->
+                                <circle cx="12" cy="17.2" r="1.6" fill="#FFF8EC" />
+                                <circle cx="12" cy="17.2" r="0.4" fill="currentColor" />
+                                <!-- 10 Finger Holes -->
+                                <circle cx="12.0" cy="16.0" r="0.18" fill="currentColor" />
+                                <circle cx="12.7" cy="16.2" r="0.18" fill="currentColor" />
+                                <circle cx="13.1" cy="16.8" r="0.18" fill="currentColor" />
+                                <circle cx="13.1" cy="17.6" r="0.18" fill="currentColor" />
+                                <circle cx="12.7" cy="18.2" r="0.18" fill="currentColor" />
+                                <circle cx="12.0" cy="18.4" r="0.18" fill="currentColor" />
+                                <circle cx="11.3" cy="18.2" r="0.18" fill="currentColor" />
+                                <circle cx="10.9" cy="17.6" r="0.18" fill="currentColor" />
+                                <circle cx="10.9" cy="16.8" r="0.18" fill="currentColor" />
+                                <circle cx="11.3" cy="16.2" r="0.18" fill="currentColor" />
+
+                                <!-- Horizontal Lobster Handset with Open Claws -->
+                                <g transform="translate(12, 10) rotate(90) scale(0.6) translate(-12, -12)">
+                                    <!-- Tail Fan -->
+                                    <path d="M8.5 22.5c-.8.5-2.5.5-3.5-.2 0 0 .5-2 2-2.8 1-.5 2-.2 2.5.5l-1 2.5z" />
+                                    <path d="M15.5 22.5c.8.5 2.5.5 3.5-.2 0 0-.5-2-2-2.8-1-.5-2-.2-2.5.5l1 2.5z" />
+                                    <path d="M12 23c-2.5 0-3.5-1.2-3.5-2.2 1.5-.5 3-.5 3.5 0 .5-.5 2-.5 3.5 0 0 1-1 2.2-3.5 2.2z" />
+
+                                    <!-- Abdomen / Tail Segments -->
+                                    <path d="M9.5 19.5c1.5.4 3.5.4 5 0 .6-.8 1-1.3.8-2 -2.1.2-4.5.2-6.6 0-.2.7.2 1.2.8 2z" />
+                                    <path d="M9.2 17c1.8.3 3.8.3 5.6 0 .4-.6.7-1.1.6-1.7-2.2.2-4.6.2-6.8 0-.1.6.2 1.1.6 1.7z" />
+                                    <path d="M9 14.8c2 .3 4 .3 6 0 .3-.6.5-1.1.5-1.6-2.3.2-4.7.2-7 0 0 .5.2 1 .5 1.6z" />
+
+                                    <!-- Main Carapace Body -->
+                                    <path d="M8.5 12.8c2.3.3 4.7.3 7 0 .8-1.5 1.2-3.5.8-5.8-2.8-.8-5.8-.8-8.6 0-.4 2.3 0 4.3.8 5.8z" />
+
+                                    <!-- Antennae -->
+                                    <path d="M11 6.5C10 4 7.5 1.5 6.5 -1M13 6.5C14 4 16.5 1.5 17.5 -1" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" />
+                                    <path d="M11.5 6C11 3 8.5 -0.5 5.5 -2M12.5 6C13 3 15.5 -0.5 18.5 -2" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" />
+
+                                    <!-- Left Open Claw -->
+                                    <!-- Outer fixed pincher arm -->
+                                    <path d="M8.5 6.5C6.8 -.5 2.2 -1.8 .8 -2.8c-1.8 1.8-.8 4.8.8 7.8 1.2 2.2 3.8 4.2 5.8 4.8L8.5 6.5z" />
+                                    <!-- Inner movable dactyl opened wide -->
+                                    <path d="M4.8 .2C2.8 -1.8 1.2 -1.2 1.8 .2c.8 2.2 3.2 4.2 5.2 5.2l.8-2.2C6.2 2.2 4.2 1.2 4.8 .2z" />
+
+                                    <!-- Right Open Claw -->
+                                    <!-- Outer fixed pincher arm -->
+                                    <path d="M15.5 6.5C17.2 -.5 21.8 -1.8 23.2 -2.8c1.8 1.8 .8 4.8-.8 7.8-1.2 2.2-3.8 4.2-5.8 4.8L15.5 6.5z" />
+                                    <!-- Inner movable dactyl opened wide -->
+                                    <path d="M19.2 .2C21.2 -1.8 22.8 -1.2 22.2 .2c-.8 2.2-3.2 4.2-5.2 5.2l-.8-2.2c1.6-1 3.6-2 3-3z" />
+
+                                    <!-- Legs (Left) -->
+                                    <path d="M8.5 9c-2-.3-4 .2-5.5 1.2M8.5 10.5c-2.2 0-4.2.8-5.5 2M8.8 12c-2.2.3-4 1.3-5 2.8M9.2 13.5c-1.8.8-3.2 2.2-3.8 3.8" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" />
+
+                                    <!-- Legs (Right) -->
+                                    <path d="M15.5 9c2-.3 4 .2 5.5 1.2M15.5 10.5c2.2 0 4.2.8 5.5 2M15.2 12c2.2.3 4 1.3 5 2.8M14.8 13.5c1.8.8 3.2 2.2 3.8 3.8" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" />
+                                </g>
+                            </svg>
+                            <h3>Contact</h3>
+                        </a>
+
+                    </div>
+                </section>
+
             </main>
-            
 
         </div>
+
+        <script>
+            const intro = document.getElementById('intro');
+            const linkscreen = document.getElementById('linkscreen');
+            const links = document.querySelectorAll('.link');
+            const bgWatermark = document.getElementById('bgWatermark');
+
+            /* ---------- Background Watermark Hover Feature ---------- */
+            links.forEach((link) => {
+                const svgContent = link.querySelector('svg').innerHTML;
+                const dir = link.dataset.dir;
+
+                link.addEventListener('mouseenter', () => {
+                    // Copy the SVG icon content and direction to the watermark container
+                    bgWatermark.innerHTML = `<svg viewBox="0 0 24 24" fill="currentColor">${svgContent}</svg>`;
+                    bgWatermark.setAttribute('data-dir', dir);
+                    // Force browser reflow so transition works smoothly when switching directions
+                    void bgWatermark.offsetWidth; 
+                    bgWatermark.classList.add('active');
+                });
+
+                link.addEventListener('mouseleave', () => {
+                    bgWatermark.classList.remove('active');
+                });
+            });
+
+
+            /* ---------- Parallax Scroll Feature ---------- */
+            function handleScroll() {
+                const rect = linkscreen.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                const windowWidth = window.innerWidth;
+
+                // Offsets calculated dynamically using window dimensions to guarantee starting off-screen
+                const offsets = {
+                    up:    { x: 0,                   y: -windowHeight * 0.8 },
+                    left:  { x: -windowWidth * 0.8,  y: 0                   },
+                    down:  { x: 0,                   y: windowHeight * 0.8  },
+                    right: { x: windowWidth * 0.8,   y: 0                   }
+                };
+
+                // Calculate scroll progress (0 when section enters screen bottom, 1 when centered)
+                let progress = (windowHeight - rect.top) / (windowHeight * 0.85);
+                progress = Math.max(0, Math.min(1, progress));
+
+                // 1. Zoom/fade out the Intro screen as you scroll down
+                intro.style.opacity = (1 - progress * 1.2).toString();
+                intro.style.transform = `scale(${1 - progress * 0.15})`;
+
+                // 2. Fly in each icon from off-screen into its grid position
+                links.forEach((link, idx) => {
+                    const dir = link.dataset.dir;
+                    const offset = offsets[dir];
+
+                    // Slight stagger so icons arrive sequentially
+                    const staggerOffset = idx * 0.05;
+                    const itemProgress = Math.max(0, Math.min(1, (progress - staggerOffset) / (1 - staggerOffset)));
+
+                    // Interpolate values from off-screen (progress 0) to centered (progress 1)
+                    const translateX = (1 - itemProgress) * offset.x;
+                    const translateY = (1 - itemProgress) * offset.y;
+                    const scale = 0.3 + itemProgress * 0.7; // Zooms up from 30% scale to 100%
+                    const opacity = Math.min(1, itemProgress * 2);
+
+                    link.style.transform = `translate3d(${translateX}px, ${translateY}px, 0) scale(${scale})`;
+                    link.style.opacity = opacity;
+                });
+            }
+
+            // Run on scroll using requestAnimationFrame for smooth 60fps performance
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        handleScroll();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+
+            // Recalculate if viewport resizes
+            window.addEventListener('resize', handleScroll);
+
+            // Initial positioning check on load
+            handleScroll();
+        </script>
+
     </body>
 </html>

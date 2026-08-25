@@ -3,6 +3,7 @@
     <head>
         <title>My First Webpage</title>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="This is my first website. It includes lots of information about my life.">
         <link rel="icon" type="image/x-icon" href="images/handsock.jpg">
 
@@ -12,6 +13,7 @@
             body {
                 border:gray hidden 4px;
                 margin:0;
+                font-family: 'Noto Sans', sans-serif;
             }
 
             header {
@@ -33,13 +35,28 @@
                 float: left;
                 padding: 5px;
             }
+            .navbutton a:hover {
+                background-color: #ddd;
+            }
 
             #navlogo {
                 margin-top: 5px;
-                display: block;
+                display: flex;
+                align-items: center;
+                gap: 10px;
                 color:#666;
                 text-align: center;
                 text-decoration: none;
+            }
+
+            .navlogoimg {
+                width: 46px;
+                height: 46px;
+                border-radius: 4px;
+                object-fit: cover;
+                border: 1px solid #ccc;
+                background-color: #e0e0e0;
+                flex-shrink: 0;
             }
 
             #navbutton {
@@ -54,25 +71,189 @@
 
             .navbar li #navbutton.active {
                 color: white;
+                background-color: #546B41;
+                border-radius: 2px;
             }
 
-            
-            .title {
-                margin: 8%;
+            /* ---------- Mobile nav (below 700px) ---------- */
 
+            .mobilenav {
+                display: none;
             }
 
-            .story{
-                margin: 8%;
-                border-color: black;
+            @media (max-width: 700px) {
+
+                .navbar {
+                    display: none;
+                }
+
+                .mobilenav {
+                    display: block;
+                    position: sticky;
+                    top: 0;
+                    z-index: 10000;
+                    background-color: #f3f3f3;
+                    border-bottom: 1px solid #e7e7e7;
+                }
+                
+
+                /* bar that holds the logo placeholder (left) and hamburger button (right) */
+                .mobilenavbar {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 8px 14px;
+                }
+
+                .mobilenavimg {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 4px;
+                    object-fit: cover;
+                    border: 1px solid #ccc;
+                    background-color: #e0e0e0;
+                }
+
+                .hamburgerbtn {
+                    background: none;
+                    border: none;
+                    padding: 8px;
+                    cursor: pointer;
+                    color: #333;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .hamburgerbtn svg {
+                    width: 26px;
+                    height: 26px;
+                }
+
+                /* dropdown sits in normal document flow, so opening it
+                   pushes the rest of the page down instead of overlaying it */
+                .mobilemenu {
+                    max-height: 0;
+                    overflow: hidden;
+                    transition: max-height 0.35s ease;
+                    background-color: #f3f3f3;
+                }
+
+                .mobilemenu.open {
+                    max-height: 260px;
+                }
+
+                .mobilemenu a {
+                    display: block;
+                    padding: 14px 20px;
+                    text-decoration: none;
+                    color: #333;
+                    border-top: 1px solid #e7e7e7;
+                    font-weight: bold;
+                }
+
+                .mobilemenu a:hover {
+                    background-color: #ddd;
+                }
+
+                .mobilemenu a.active {
+                    background-color: #214341;
+                    color: white;
+                }
             }
 
-            
+            /* ---------- Timeline / list layout ---------- */
 
-            
+            .pagetitle {
+                text-align: center;
+                margin: 40px 20px 10px;
+                color: #214341;
+            }
 
+            .pagesubtitle {
+                text-align: center;
+                margin: 0 20px 50px;
+                color: #666;
+                font-size: 15px;
+            }
 
-            
+            .timeline {
+                max-width: 800px;
+                margin: 0 auto 60px;
+                padding: 0 20px;
+            }
+
+            .entry {
+                display: flex;
+                align-items: center;
+                margin-bottom: 30px;
+            }
+
+            .entry:last-child {
+                margin-bottom: 0;
+            }
+
+            .entrycard {
+                display: flex;
+                align-items: center;
+                gap: 18px;
+                text-decoration: none;
+                color: #214341;
+                border: 3px solid #546B41;
+                border-radius: 6px;
+                padding: 10px;
+                background-color: #FFF8EC;
+                flex: 1;
+                transition: transform 0.25s ease, box-shadow 0.25s ease;
+            }
+
+            a.entrycard:hover {
+                transform: translateX(6px);
+                box-shadow: 4px 4px 0 #546B41;
+            }
+
+            .entrythumb {
+                width: 90px;
+                height: 90px;
+                object-fit: cover;
+                border: 2px solid #546B41;
+                border-radius: 4px;
+                flex-shrink: 0;
+            }
+
+            .entrytext h3 {
+                margin: 0 0 4px;
+                font-size: 20px;
+            }
+
+            .entrytext p {
+                margin: 0;
+                font-size: 13px;
+                color: #666;
+            }
+
+            .entrydate {
+                margin-top: 4px !important;
+                font-size: 12px !important;
+                color: #888 !important;
+                font-style: italic;
+            }
+
+            .entrycard.disabled {
+                cursor: default;
+                opacity: 0.75;
+            }
+
+            @media (max-width: 600px) {
+                .entry {
+                    align-items: stretch;
+                }
+                .entrycard {
+                    flex-direction: column;
+                    text-align: center;
+                }
+            }
+
         </style>
     </head>
     <body>
@@ -84,7 +265,7 @@
                 <ul>
                     <li style="float: left;">
                         <a href="art.html" id="navlogo">
-                            <strong id="navbutton">Shayna Messler's Artistic Endeavors</strong>
+                            <img src="images/logo.jpg" class="navlogoimg" alt="Shayna Messler logo">
                         </a>
                     </li>
                     <li style="float: right;">
@@ -93,7 +274,7 @@
                         </a>
                     </li>
                     <li style="float: right;">
-                        <a href="art.html" id="navbutton">
+                        <a href="art.html" id="navbutton" class="active">
                             <strong>ART</strong>
                         </a>
                     </li>
@@ -109,27 +290,44 @@
                     </li>
                 </ul>
             </div>
+
+            <div class="mobilenav">
+                <div class="mobilenavbar">
+                    <a href="art.html">
+                        <img src="images/logo.jpg" class="mobilenavimg" alt="Shayna Messler logo">
+                    </a>
+                    <button class="hamburgerbtn" id="hamburgerbtn" onclick="toggleMobileMenu()" aria-expanded="false" aria-controls="mobileMenu" aria-label="Toggle navigation menu">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor"><path d="M96 160C96 142.3 110.3 128 128 128L512 128C529.7 128 544 142.3 544 160C544 177.7 529.7 192 512 192L128 192C110.3 192 96 177.7 96 160zM96 320C96 302.3 110.3 288 128 288L512 288C529.7 288 544 302.3 544 320C544 337.7 529.7 352 512 352L128 352C110.3 352 96 337.7 96 320zM544 480C544 497.7 529.7 512 512 512L128 512C110.3 512 96 497.7 96 480C96 462.3 110.3 448 128 448L512 448C529.7 448 544 462.3 544 480z"/></svg>
+                    </button>
+                </div>
+                <nav class="mobilemenu" id="mobileMenu">
+                    <a href="animate.html">HOME</a>
+                    <a href="art.html" class="active">ART</a>
+                    <a href="projects.html">PROJECTS</a>
+                    <a href="files/Shayna_Messler_latexpower.pdf" target="_blank" rel="noopener noreferrer">RESUME</a>
+                </nav>
+            </div>
         </header>
-            
+
             <main>
                
 
-            <div class="title">
-            Cheat, by Shayna Messler
-            </div>
+                <div class="title" style="padding:5%">
+                Cheat, by Shayna Messler
+                </div>
 
-            </br>
-            <div class="story">
-            She came every night. Her faucet shinier, her bowl cleaner. She was everything I could never become. I zip my bag; there wasn't much here. I lay back, letting the waves of time take me back to where all porcelain is from. He said he loved me, but he let that sink in.
-            </div>
-          
-            <details class="title">
-                <summary>Click here to expand more information</summary>
-                <p>This was my submission to the Feburary 2026, 53 word story competition hosted by press53.com, inspired by the theme, <b>sink</b>.</p>
-            </details>
+                </br>
+                <div class="story" style="padding:10%">
+                She came every night. Her faucet shinier, her bowl cleaner. She was everything I could never become. I zip my bag; there wasn't much here. I lay back, letting the waves of time take me back to where all porcelain is from. He said he loved me, but he let that sink in.
+                </div>
+            
+                <details class="title" style="padding:5%">
+                    <summary>Click here to expand more information</summary>
+                    <p>This was my submission to the Feburary 2026, 53 word story competition hosted by press53.com, inspired by the theme, <b>sink</b>.</p>
+                </details>
                 
             </main>
-            
+
 
         </div>
     </body>

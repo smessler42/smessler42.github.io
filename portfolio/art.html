@@ -3,6 +3,7 @@
     <head>
         <title>My First Webpage</title>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="This is my first website. It includes lots of information about my life.">
         <link rel="icon" type="image/x-icon" href="images/handsock.jpg">
 
@@ -12,6 +13,7 @@
             body {
                 border:gray hidden 4px;
                 margin:0;
+                font-family: 'Noto Sans', sans-serif;
             }
 
             header {
@@ -33,13 +35,28 @@
                 float: left;
                 padding: 5px;
             }
+            .navbutton a:hover {
+                background-color: #ddd;
+            }
 
             #navlogo {
                 margin-top: 5px;
-                display: block;
+                display: flex;
+                align-items: center;
+                gap: 10px;
                 color:#666;
                 text-align: center;
                 text-decoration: none;
+            }
+
+            .navlogoimg {
+                width: 46px;
+                height: 46px;
+                border-radius: 4px;
+                object-fit: cover;
+                border: 1px solid #ccc;
+                background-color: #e0e0e0;
+                flex-shrink: 0;
             }
 
             #navbutton {
@@ -54,72 +71,189 @@
 
             .navbar li #navbutton.active {
                 color: white;
+                background-color: #546B41;
+                border-radius: 2px;
             }
 
-            
-            
+            /* ---------- Mobile nav (below 700px) ---------- */
 
-            @media (max-width: 800px) {
-                .example-image-gallery div {
-                    width: calc(50% - 10px);
+            .mobilenav {
+                display: none;
+            }
+
+            @media (max-width: 700px) {
+
+                .navbar {
+                    display: none;
+                }
+
+                .mobilenav {
+                    display: block;
+                    position: sticky;
+                    top: 0;
+                    z-index: 10000;
+                    background-color: #f3f3f3;
+                    border-bottom: 1px solid #e7e7e7;
+                }
+                
+
+                /* bar that holds the logo placeholder (left) and hamburger button (right) */
+                .mobilenavbar {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 8px 14px;
+                }
+
+                .mobilenavimg {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 4px;
+                    object-fit: cover;
+                    border: 1px solid #ccc;
+                    background-color: #e0e0e0;
+                }
+
+                .hamburgerbtn {
+                    background: none;
+                    border: none;
+                    padding: 8px;
+                    cursor: pointer;
+                    color: #333;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .hamburgerbtn svg {
+                    width: 26px;
+                    height: 26px;
+                }
+
+                /* dropdown sits in normal document flow, so opening it
+                   pushes the rest of the page down instead of overlaying it */
+                .mobilemenu {
+                    max-height: 0;
+                    overflow: hidden;
+                    transition: max-height 0.35s ease;
+                    background-color: #f3f3f3;
+                }
+
+                .mobilemenu.open {
+                    max-height: 260px;
+                }
+
+                .mobilemenu a {
+                    display: block;
+                    padding: 14px 20px;
+                    text-decoration: none;
+                    color: #333;
+                    border-top: 1px solid #e7e7e7;
+                    font-weight: bold;
+                }
+
+                .mobilemenu a:hover {
+                    background-color: #ddd;
+                }
+
+                .mobilemenu a.active {
+                    background-color: #214341;
+                    color: white;
                 }
             }
 
-            /* Captions */
+            /* ---------- Timeline / list layout ---------- */
 
-            .imagegallery div span {
-                position: absolute;
-                bottom: 5px;
-                left: 0;
-                width: 100%;
-                box-sizing: border-box;
-                background: white;
-                color: black;
+            .pagetitle {
                 text-align: center;
-                padding: 5px 10px;
-                font-size: 20px;
-                opacity: 0;
-                transform: translateY(100px);
-                transition: transform 0.4s ease, opacity 0.5s ease;
+                margin: 40px 20px 10px;
+                color: #214341;
             }
 
-            .imagegallery div img {
-                transition: transform 0.5s ease;
+            .pagesubtitle {
+                text-align: center;
+                margin: 0 20px 50px;
+                color: #666;
+                font-size: 15px;
             }
 
-            /* On Hover */
-
-            .imagegallery div:hover span {
-                opacity: 1;
-                transform: none;
+            .timeline {
+                max-width: 800px;
+                margin: 0 auto 60px;
+                padding: 0 20px;
             }
 
-            .imagegallery div:hover img {
-                transform: scale(1.35) rotate(10deg);
-            }
-
-            .imggalleryimg {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-
-            .imagegallery {
+            .entry {
                 display: flex;
-                flex-wrap: wrap;
+                align-items: center;
+                margin-bottom: 30px;
             }
 
-            .imagegallery div {
-                margin: 5px;
-                border: 5px solid;
-                box-sizing: border-box;
-                width: calc(25% - 10px);
-                position: relative;
-                overflow: hidden;
+            .entry:last-child {
+                margin-bottom: 0;
             }
 
+            .entrycard {
+                display: flex;
+                align-items: center;
+                gap: 18px;
+                text-decoration: none;
+                color: #214341;
+                border: 3px solid #546B41;
+                border-radius: 6px;
+                padding: 10px;
+                background-color: #FFF8EC;
+                flex: 1;
+                transition: transform 0.25s ease, box-shadow 0.25s ease;
+            }
 
-            
+            a.entrycard:hover {
+                transform: translateX(6px);
+                box-shadow: 4px 4px 0 #546B41;
+            }
+
+            .entrythumb {
+                width: 90px;
+                height: 90px;
+                object-fit: cover;
+                border: 2px solid #546B41;
+                border-radius: 4px;
+                flex-shrink: 0;
+            }
+
+            .entrytext h3 {
+                margin: 0 0 4px;
+                font-size: 20px;
+            }
+
+            .entrytext p {
+                margin: 0;
+                font-size: 13px;
+                color: #666;
+            }
+
+            .entrydate {
+                margin-top: 4px !important;
+                font-size: 12px !important;
+                color: #888 !important;
+                font-style: italic;
+            }
+
+            .entrycard.disabled {
+                cursor: default;
+                opacity: 0.75;
+            }
+
+            @media (max-width: 600px) {
+                .entry {
+                    align-items: stretch;
+                }
+                .entrycard {
+                    flex-direction: column;
+                    text-align: center;
+                }
+            }
+
         </style>
     </head>
     <body>
@@ -131,7 +265,7 @@
                 <ul>
                     <li style="float: left;">
                         <a href="art.html" id="navlogo">
-                            <strong id="navbutton">Shayna Messler's Artistic Endeavors</strong>
+                            <img src="images/logo.jpg" class="navlogoimg" alt="Shayna Messler logo">
                         </a>
                     </li>
                     <li style="float: right;">
@@ -140,7 +274,7 @@
                         </a>
                     </li>
                     <li style="float: right;">
-                        <a href="art.html" id="navbutton">
+                        <a href="art.html" id="navbutton" class="active">
                             <strong>ART</strong>
                         </a>
                     </li>
@@ -156,48 +290,101 @@
                     </li>
                 </ul>
             </div>
+
+            <div class="mobilenav">
+                <div class="mobilenavbar">
+                    <a href="art.html">
+                        <img src="images/logo.jpg" class="mobilenavimg" alt="Shayna Messler logo">
+                    </a>
+                    <button class="hamburgerbtn" id="hamburgerbtn" onclick="toggleMobileMenu()" aria-expanded="false" aria-controls="mobileMenu" aria-label="Toggle navigation menu">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor"><path d="M96 160C96 142.3 110.3 128 128 128L512 128C529.7 128 544 142.3 544 160C544 177.7 529.7 192 512 192L128 192C110.3 192 96 177.7 96 160zM96 320C96 302.3 110.3 288 128 288L512 288C529.7 288 544 302.3 544 320C544 337.7 529.7 352 512 352L128 352C110.3 352 96 337.7 96 320zM544 480C544 497.7 529.7 512 512 512L128 512C110.3 512 96 497.7 96 480C96 462.3 110.3 448 128 448L512 448C529.7 448 544 462.3 544 480z"/></svg>
+                    </button>
+                </div>
+                <nav class="mobilemenu" id="mobileMenu">
+                    <a href="animate.html">HOME</a>
+                    <a href="art.html" class="active">ART</a>
+                    <a href="projects.html">PROJECTS</a>
+                    <a href="files/Shayna_Messler_latexpower.pdf" target="_blank" rel="noopener noreferrer">RESUME</a>
+                </nav>
+            </div>
         </header>
-            
+
             <main>
-               
 
             <script>
             window.addEventListener('scroll', () => {
                 document.body.style.setProperty('--scroll', window.pageYOffset / (document.body.offsetHeight - window.innerHeight));
             }, false);
+
+            function toggleMobileMenu() {
+                const menu = document.getElementById('mobileMenu');
+                const btn = document.getElementById('hamburgerbtn');
+                const isOpen = menu.classList.toggle('open');
+                btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            }
             </script>
 
-           <div class="section3">
-                <div class="imagegallery">
-                    <div>
-                        <a href="cheat.html">
-                        <img src="images/cheat.jpg" class="imggalleryimg"/> <span>Cheat</span></a>
-                    </div>
-                    <div>
-                        
-                        <img src="images/reframed.png" class="imggalleryimg"/> <span>Reframed</span>
-                    </div>
-                    <div>
-                        
-                        <img src="images/shapeshift.jpg" class="imggalleryimg"/> <span>ShapeShift</span>
-                    </div>
-                    <div>
-                        <img src="images/i.jpg" class="imggalleryimg"/> <span>i</span>
-                    </div>
-                    <div>
-                        <img src="images/other.JPG" class="imggalleryimg"/> <span>More Coming Soon!</span>
-                    </div>
-                    
-                    
+            <h1 class="pagetitle">My Art</h1>
+            <p class="pagesubtitle">A running list of pieces, in the order I made them.</p>
+
+            <div class="timeline">
+
+                <div class="entry">
+                    <a href="cheat.html" class="entrycard">
+                        <img src="images/cheat.jpg" class="entrythumb" alt="Cheat">
+                        <div class="entrytext">
+                            <h3>Cheat</h3>
+                            <p>Click to read the story</p>
+                            <p class="entrydate">Date: Feburary 2026</p>
+                        </div>
+                    </a>
                 </div>
-                
-                
+
+                <div class="entry">
+                    <div class="entrycard disabled">
+                        <img src="images/reframed.png" class="entrythumb" alt="Reframed">
+                        <div class="entrytext">
+                            <h3>Reframed</h3>
+                            <p class="entrydate">Date: Winter 2025 - Spring 2026</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="entry">
+                    <a href="shapeshift.html" class="entrycard">
+                        <img src="images/shapeshift.jpg" class="entrythumb" alt="ShapeShift">
+                        <div class="entrytext">
+                            <h3>ShapeShift</h3>
+                            <p>Click to watch</p>
+                            <p class="entrydate">Date: Summer 2025</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="entry">
+                    <div class="entrycard disabled">
+                        <img src="images/i.jpg" class="entrythumb" alt="i">
+                        <div class="entrytext">
+                            <h3>i</h3>
+                            <p class="entrydate">Date: Spring 2026</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="entry">
+                    <div class="entrycard disabled">
+                        <img src="images/other.JPG" class="entrythumb" alt="More coming soon">
+                        <div class="entrytext">
+                            <h3>More Coming Soon!</h3>
+                            
+                        </div>
+                    </div>
+                </div>
 
             </div>
-                
-                
+
             </main>
-            
+
 
         </div>
     </body>
